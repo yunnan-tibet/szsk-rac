@@ -1,0 +1,16 @@
+.g-search {
+  position: relative;
+
+  .m-btns {
+    position: absolute;
+    right: 0;
+    bottom: 24px;
+
+    &.f-new-line {
+      bottom: -32px;
+    }
+    .u-search-btn {
+      margin-left: 16px;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+.m-component-common-video {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .u-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26px;
+    height: 26px;
+    height: auto;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  &:hover{
+    .u-play-btn{
+      opacity: 1;
+    }
+  }
+}
+
+.m-video-modal {
+  .u-big-video {
+    vertical-align: middle;
+    outline:none;
+    width: 100%;
+  }
+  .m-video-box{
+    position: relative;
+    .m-Rect-box{
+      cursor: crosshair;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top:0
+    }
+    // .u-Rect-canvas{
+    //   border: 1px;
+    //   position: absolute;
+    //   left: 0;
+    //    top:  0;
+    // }
+  }
+ .m-cropVideo-footer{
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+ }
+}

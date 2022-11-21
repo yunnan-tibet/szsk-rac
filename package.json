@@ -1,0 +1,102 @@
+{
+  "name": "@szsk/rac",
+  "version": "1.0.36",
+  "description": "szsk react admin components",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "lib": "rm -rf lib && node-sass src -o lib && tsc --outDir lib -d && npm run replace-scss",
+    "dev": "webpack-dev-server --config config/webpack.dev.config.js",
+    "replace-scss": "node scripts/replace-scss.js",
+    "pub": "npm run lib && npm publish --access public"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "scss": [
+      "stylelint --fix"
+    ],
+    "*.{js,jsx,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/components7/szsk-rac"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/components7/szsk-rac/issues"
+  },
+  "author": "qhchen@secusoft.cc",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "~7.5.5",
+    "@babel/core": "~7.5.5",
+    "@babel/plugin-proposal-class-properties": "~7.5.5",
+    "@babel/polyfill": "~7.6.0",
+    "@babel/preset-env": "~7.5.5",
+    "@babel/preset-react": "~7.0.0",
+    "@babel/preset-typescript": "~7.6.0",
+    "@types/antd": "~1.0.0",
+    "@types/react-copy-to-clipboard": "^5.0.2",
+    "@types/react-infinite-scroller": "^1.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "babel-loader": "~8.0.6",
+    "babel-plugin-import": "~1.12.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^3.4.2",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "fs-extra": "^8.1.0",
+    "install": "^0.13.0",
+    "less": "^3.0.0",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^10.0.7",
+    "mini-css-extract-plugin": "^0.8.2",
+    "node-sass": "~4.12.0",
+    "npm": "^6.14.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.2.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^2.4.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "ts-loader": "~6.1.0",
+    "tslint": "^5.20.1",
+    "tslint-react": "^4.2.0",
+    "typescript": "^3.8.3",
+    "webpack": "~4.39.3",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "~4.2.2",
+    "yorkie": "^2.0.0"
+  },
+  "peerDependencies": {
+    "antd": ">=4.0.0",
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "dependencies": {
+    "@szsk/utils": "^0.0.7",
+    "cropperjs": "^1.5.12",
+    "react-copy-to-clipboard": "^5.0.4",
+    "react-cropper": "^2.1.8",
+    "react-resize-aware": "^3.1.1"
+  }
+}

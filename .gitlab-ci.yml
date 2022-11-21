@@ -1,0 +1,38 @@
+image: node:8.11.2
+
+stages:
+  - build
+  - publish
+
+
+build:
+  stage: build
+  script:
+    - pwd
+    - npm config set registry https://registry.npm.taobao.org
+    - npm install
+    - npm update
+    - echo antdVersion &&  cat node_modules/antd/package.json
+    - echo antd && ls node_modules/antd/lib
+    - npm run build
+  artifacts:
+    name: "output"
+    paths:
+      - lib
+      - dist
+    expire_in: 1 day
+  only:
+    - tags
+
+publish:
+  stage: publish
+  script:
+    - echo lib && ls lib
+    - echo dist && ls dist
+    - npm config set registry https://registry.npm.taobao.org
+    - npm install -g npm-cli-login
+    - npm config set registry https://registry.npmjs.org
+    - npm-cli-login -u ${CI_NPM_USER} -p ${CI_NPM_PASS} -e ${CI_NPM_MAIL}
+    - npm publish --access public
+  only:
+    - tags

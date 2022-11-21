@@ -1,0 +1,26 @@
+.m-title {
+  display: inline-block;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 22px;
+  color: #2e3033;
+  cursor: pointer;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ant-tooltip-arrow-content {
+  display: none;
+}
+
+.ant-tooltip-inner {
+  background-color: #FFFFFF;
+  color: #333333;
+  .m-copy {
+    color: #0074FF;
+    padding-left: 10px;
+    cursor: pointer;
+  }
+}
