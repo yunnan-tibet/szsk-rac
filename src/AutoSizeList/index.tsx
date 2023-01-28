@@ -36,7 +36,7 @@ const AutoSizeList = (props: IProps) => {
       }
       setNumObj({ itemNum, space: mySpace });
     }
-  }, [containerSizes.width]);
+  }, [containerSizes.width, list, itemWidth, minSpace]);
 
   return (
     <div className="g-autoSizeList">

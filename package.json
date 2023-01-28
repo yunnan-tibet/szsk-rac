@@ -1,6 +1,6 @@
 {
   "name": "@szsk/rac",
-  "version": "1.0.41",
+  "version": "1.0.44",
   "description": "szsk react admin components",
   "main": "lib/index.js",
   "files": [
@@ -97,6 +97,6 @@
     "cropperjs": "^1.5.12",
     "react-copy-to-clipboard": "^5.0.4",
     "react-cropper": "^2.1.8",
-    "react-resize-aware": "^3.1.0"
+    "react-resize-aware": "3.1.1"
   }
 }
