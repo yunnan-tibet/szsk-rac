@@ -1,3 +1,4 @@
+import { funcUtils } from '@szsk/utils';
 import React, { useEffect, useState } from 'react';
 import useResizeAware from 'react-resize-aware';
 import './index.scss';
@@ -24,15 +25,14 @@ const AutoSizeList = (props: IProps) => {
   // 监听父容器宽度变化
   useEffect(() => {
     if (containerSizes.width) {
+      const cWidth = Math.floor(containerSizes.width - 1);
       // 一行的最大个数，但是因为用的是floor，所以item宽度可能缺失，间距增加，minSpace需要增加
-      const itemNum = Math.floor(containerSizes.width / (itemWidth + minSpace));
+      const itemNum = Math.floor(cWidth / (itemWidth + minSpace));
       // 初始化，数量小于最大个数，margin单边限定为minSpace，防止抖动
       let mySpace = minSpace;
       if (list.length >= itemNum) {
         // 容器宽度 - item占据总宽度 / 间距个数 = 间距 px
-        mySpace = Math.floor(
-          (containerSizes.width - itemNum * itemWidth) / itemNum,
-        );
+        mySpace = Math.floor((cWidth - itemNum * itemWidth) / itemNum);
       }
       setNumObj({ itemNum, space: mySpace });
     }
@@ -45,11 +45,12 @@ const AutoSizeList = (props: IProps) => {
         // 用于到达最大个数换行
         if (idx % rowCount === 0) {
           return (
-            <div className="m-row">
+            <div className="m-row" key={`${idx}`}>
               {list.map((_item, jdx) => {
                 if (jdx >= idx && jdx < idx + rowCount) {
                   return (
                     <div
+                      key={`${idx}${jdx}`}
                       className="m-autoSpaceItem"
                       style={{ margin: `0 ${halfSpace}px 0 ${halfSpace}px` }}
                     >

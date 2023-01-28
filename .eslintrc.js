@@ -60,5 +60,6 @@ module.exports = {
     'prefer-promise-reject-errors': 0,
     'prefer-destructuring': 0,
     'no-lonely-if': 0,
+    'react/no-array-index-key': 0,
   },
 };
