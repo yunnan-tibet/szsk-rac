@@ -7,7 +7,7 @@ interface IProps {
   // 数据源
   list: any[];
   // item渲染方式
-  render: (item: any, index?: number) => JSX.Element;
+  render: any;
   // item宽度
   itemWidth: number;
   // 两个item中间最小间距
@@ -54,7 +54,7 @@ const AutoSizeList = (props: IProps) => {
                       className="m-autoSpaceItem"
                       style={{ margin: `0 ${halfSpace}px 0 ${halfSpace}px` }}
                     >
-                      {render(_item, jdx)}
+                      <render />
                     </div>
                   );
                 }
