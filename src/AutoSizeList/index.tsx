@@ -54,7 +54,7 @@ const AutoSizeList = (props: IProps) => {
                       className="m-autoSpaceItem"
                       style={{ margin: `0 ${halfSpace}px 0 ${halfSpace}px` }}
                     >
-                      <render />
+                      {render(_item, jdx)}
                     </div>
                   );
                 }

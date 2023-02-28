@@ -8,6 +8,7 @@ import {
   InputNumber,
   TreeSelect,
 } from 'antd';
+import Tree from 'antd/es/tree/Tree';
 import ImageUploader from '../ImageUploader';
 import {
   IFormCheckbox,
@@ -54,7 +55,7 @@ export default function getItemComponent(type: IFormType) {
         placeholder={props.placeholder || `请选择${item.label}`}
         {...props}
       >
-        {options.map((option: ISelectOption) => {
+        {(options || []).map((option: ISelectOption) => {
           const { label, value } = option;
           return (
             <Select.Option key={value} value={value}>

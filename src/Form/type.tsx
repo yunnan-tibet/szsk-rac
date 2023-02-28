@@ -4,7 +4,7 @@ import { RadioGroupProps } from 'antd/lib/radio';
 import { CheckboxGroupProps } from 'antd/lib/checkbox';
 import { DatePickerProps } from 'antd/lib/date-picker';
 import { Rule } from 'antd/lib/form';
-import { InputNumberProps, TreeSelectProps } from 'antd';
+import { InputNumberProps, TreeProps, TreeSelectProps } from 'antd';
 import { IUploderProps } from '../ImageUploader';
 
 // 基础类型
