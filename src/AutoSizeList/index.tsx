@@ -6,22 +6,23 @@ import './index.scss';
 interface IProps {
   // 数据源
   list: any[];
-  // item渲染方式
-  render: any;
   // item宽度
   itemWidth: number;
+  // 组件形式渲染，为了解决hook放到组件内，减少耦合
+  CompCard?: React.FC<{ data: any; idx: number }>;
+  // item渲染方式
+  render?: any;
   // 两个item中间最小间距
   minSpace?: number;
 }
 const AutoSizeList = (props: IProps) => {
-  const { list = [], render, itemWidth, minSpace = 10 } = props;
+  const { list = [], render, itemWidth, minSpace = 10, CompCard } = props;
   // space 间距px, itemNum 一行的最大个数
   const [numObj, setNumObj] = useState({ itemNum: 1, space: minSpace });
   // 监听父容器大小变化的hook
   const [containerResizeListener, containerSizes] = useResizeAware();
   const { itemNum: rowCount, space } = numObj;
   const halfSpace = space / 2;
-
   // 监听父容器宽度变化
   useEffect(() => {
     if (containerSizes.width) {
@@ -50,11 +51,13 @@ const AutoSizeList = (props: IProps) => {
                 if (jdx >= idx && jdx < idx + rowCount) {
                   return (
                     <div
+                      // 以idx作为key，会让diff认为这个节点本身一直都是没有变更的
                       key={`${idx}${jdx}`}
                       className="m-autoSpaceItem"
                       style={{ margin: `0 ${halfSpace}px 0 ${halfSpace}px` }}
                     >
-                      {render(_item, jdx)}
+                      {CompCard && <CompCard data={_item} idx={jdx} />}
+                      {render && render(_item, jdx)}
                     </div>
                   );
                 }
