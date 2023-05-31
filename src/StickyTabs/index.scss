@@ -1,0 +1,25 @@
+.m-stickyTabs {
+  position: relative;
+
+  .m-head {
+    // .bg {
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 100%;
+    //   z-index: -1;
+    //   background: url('../../assets/appBg1.png') no-repeat;
+    //   background-size: 100% 290px;
+    // }
+  }
+
+  .m-tabPanels {
+    padding-top: 16px;
+
+    .m-tabPanel {
+    }
+  }
+
+  .ant-tabs-nav {
+    margin: 0;
+  }
+}
