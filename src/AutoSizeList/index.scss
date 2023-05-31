@@ -4,10 +4,24 @@
   height: 100%;
 
   .m-row {
+    display: flex;
     width: 100%;
+    justify-content: space-between;
+    &.f-lastRow {
+      justify-content: left;
+    }
+
+    &.f-full {
+      justify-content: space-between;
+    }
+
     .m-autoSpaceItem {
       display: inline-block;
       vertical-align: top;
+
+      &:last-child {
+        margin-right: 0 !important;
+      }
     }
   }
 }

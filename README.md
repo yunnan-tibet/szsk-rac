@@ -21,6 +21,8 @@ search + table的组合，不需要考虑分页等逻辑
 ### 自适应型
 #### AutoSizeList
 自适应容器下用于列表自适应排列
+#### StickyTabs
+tabs瀑布展示模块吸顶，整体模块head + tabs吸顶，tab切换与滚动联动
 #### ContainImage
 图片自适应块居中展示
 #### ContainVideo
