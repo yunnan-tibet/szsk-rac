@@ -11,28 +11,20 @@ interface IProps {
   list: any[];
   // item宽度
   itemWidth: number;
-  // item拉伸方式
-  type?: 'flex' | 'default';
   // 组件形式渲染，为了解决hook放到组件内，减少耦合
   CompCard?: React.FC<{ data: any; idx: number }>;
-  // item渲染方式
+  // item渲染方式，jsx形式，为了兼容之前的版本
   render?: any;
   // 两个item中间最小间距
   minSpace?: number;
 }
 const AutoSizeList = (props: IProps) => {
-  const {
-    list = [],
-    render,
-    itemWidth,
-    minSpace = 10,
-    CompCard,
-    type = 'default',
-  } = props;
+  const { list = [], render, itemWidth, minSpace = 10, CompCard } = props;
   // space 间距px, itemNum 一行的最大个数
   const [numObj, setNumObj] = useState({ itemNum: 1, space: minSpace });
   // 监听父容器大小变化的hook
   const [containerResizeListener, containerSizes] = useResizeAware();
+  // 这里计算了一行最大高度，space是固定item宽度下可以存在的间距
   const { itemNum: rowCount, space } = numObj;
   // 监听父容器宽度变化
   useEffect(() => {
@@ -70,25 +62,21 @@ const AutoSizeList = (props: IProps) => {
               {list.map((_item, jdx) => {
                 if (jdx >= idx && jdx < idx + rowCount) {
                   const getStyle = () => {
-                    if (type === 'flex') {
-                      // 自适应的
-                      if (jdx === idx + rowCount - 1) {
-                        // 一行的最后一个？
-                        return {
-                          flex: `0 0 ${(1 / rowCount) * 100}%`,
-                        };
-                      }
-                      // 非最后一个
+                    const percent = (1 / rowCount) * 100;
+                    // 自适应的
+                    if (jdx === idx + rowCount - 1) {
+                      // 一行的最后一个
                       return {
-                        paddingRight: `${minSpace}px`,
-                        flex: `0 0 ${(1 / rowCount) * 100}%`,
+                        flex: `0 0 ${percent}%`,
+                        maxWidth: `${percent}%`,
                       };
                     }
-                    // 非自适应的，最后一行，不满的情况
-                    if (isLastLine && !lastLineFull) {
-                      return { marginRight: `${space}px` };
-                    }
-                    return {};
+                    // 非最后一个
+                    return {
+                      paddingRight: `${minSpace}px`,
+                      flex: `0 0 ${percent}%`,
+                      maxWidth: `${percent}%`,
+                    };
                   };
                   return (
                     <div
