@@ -25,8 +25,7 @@ export interface ITabItem {
 
 /**
  * 吸顶，滚动联动
- * 局限1.scrollContainer的顶层元素都需要是不滚动的
- * 局限2.如果StickyTabs元素不够高或者下面没东西了，就会导致后面的tab切不到，因为已经滚动到最底下了
+ * 局限.如果StickyTabs元素不够高或者下面没东西了，就会导致后面的tab切不到，因为已经滚动到最底下了
  * @param props
  * @returns
  */
@@ -34,6 +33,7 @@ const StickyTabs = (props: IProps) => {
   const { tabL, headEle, scrollContainer } = props;
   const sc = (scrollContainer || window) as any; // 容器
   const headRef = useRef<any>(null); // head元素
+  const idleCallbackRef = useRef<any>(null);
   const childRefs = useRef<any>({}); // tabs内容元素
   const stickyComp = useRef<any>(null); // 组件元素
   const [activeKey, setActiveKey] = useState<string>(); // active的tab
@@ -61,17 +61,44 @@ const StickyTabs = (props: IProps) => {
     }
   }, [headRef, containerSizes.height]);
 
-  useEffect(() => {
+  const getDistanceFromTop = (childElement: any) => {
+    if (!childElement) return 0;
+
+    let offsetDistance = 0;
+    let currentElement = childElement;
+
+    while (currentElement) {
+      offsetDistance += currentElement.offsetTop;
+      currentElement = currentElement.offsetParent;
+    }
+
+    return offsetDistance;
+  };
+
+  const calculateDistanceToTop = () => {
     // 固定的外层高度，距定位父元素高度
     let extraHeight = 0;
     if (sc?.getBoundingClientRect && stickyComp.current) {
       // 获取固定的滚动父元素距离视口
       const { top: containerTop } = sc.getBoundingClientRect();
-      const { top: compTop } = stickyComp.current.getBoundingClientRect();
+      const compTop = getDistanceFromTop(stickyComp.current);
       extraHeight = compTop - containerTop;
     }
-    setDistance(extraHeight);
-  }, [stickyComp, sc]);
+    if (extraHeight !== distance) {
+      setDistance(extraHeight);
+    }
+
+    idleCallbackRef.current = requestIdleCallback(calculateDistanceToTop);
+  };
+
+  // 因为顶部距离不一定是固定的，所以需要监听获取
+  useEffect(() => {
+    idleCallbackRef.current = requestIdleCallback(calculateDistanceToTop);
+
+    return () => {
+      cancelIdleCallback(idleCallbackRef.current);
+    };
+  }, [distance, stickyComp, sc]);
 
   const scrollCb = useCallback(() => {
     let _activeKey;
