@@ -13,7 +13,6 @@ interface IProps {
   outerClass?: string; // 传入的class
   picCallback?: () => void;
   videoCallback?: (dataUrl: string) => void;
-  finishModeled?: number | null;
   cropEnable?: boolean;
 }
 const ContainAttach = (props: IProps) => {
@@ -24,7 +23,6 @@ const ContainAttach = (props: IProps) => {
     outerClass,
     width = '100px',
     height = '100px',
-    finishModeled = 0,
     cropEnable = false,
     videoCallback,
     title,
@@ -38,7 +36,6 @@ const ContainAttach = (props: IProps) => {
           outerClass={outerClass}
           width={width}
           height={height}
-          finishModeled={finishModeled}
         />
       ) : (
         <CommonVideo

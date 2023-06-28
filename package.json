@@ -1,6 +1,6 @@
 {
   "name": "@szsk/rac",
-  "version": "1.1.2",
+  "version": "1.1.7",
   "description": "szsk react admin components",
   "main": "lib/index.js",
   "files": [
@@ -99,5 +99,23 @@
     "react-cropper": "^2.1.8",
     "react-resize-aware": "3.1.1",
     "react-sticky-box": "^2.0.4"
-  }
+  },
+  "keywords": [
+    "响应式",
+    "自适应",
+    "JSON FORM",
+    "配置项表单",
+    "responsive list",
+    "auto list",
+    "self-adaption list",
+    "响应式卡片列表",
+    "自适应卡片列表",
+    "图片裁剪",
+    "视频截图",
+    "video",
+    "stickyTabs",
+    "瀑布式联动tab",
+    "拼图",
+    "copy"
+  ]
 }

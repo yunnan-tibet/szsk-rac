@@ -13,7 +13,7 @@ interface IProps {
   itemWidth: number;
   // 组件形式渲染，为了解决hook放到组件内，减少耦合
   CompCard?: React.FC<{ data: any; idx: number }>;
-  // item渲染方式，jsx形式，为了兼容之前的版本
+  // item渲染方式，jsx形式，为了兼容之前的版本，后面将废弃
   render?: any;
   // 两个item中间最小间距
   minSpace?: number;

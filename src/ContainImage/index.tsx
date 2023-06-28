@@ -8,8 +8,7 @@ interface IProps {
   width: string; // 容器宽度
   height: string; // 容器高度
   outerClass?: string; // 传入的class
-  picCallback?: () => void;
-  finishModeled?: number | null;
+  picCallback?: () => void; // 图片点击事件
 }
 const ContainImage = (props: IProps) => {
   const {
@@ -18,7 +17,6 @@ const ContainImage = (props: IProps) => {
     outerClass,
     width = '100px',
     height = '100px',
-    finishModeled = 0,
   } = props;
   const [wrapperClass, setWrapperClass] = useState('');
   const [containerResizeListener, containerSizes] = useResizeAware();
@@ -52,7 +50,6 @@ const ContainImage = (props: IProps) => {
       style={{ width, height }}
     >
       {containerResizeListener}
-      {finishModeled ? <div className="m-shapeModal-Status">已完成</div> : ''}
       {!picCallback ? (
         <Image wrapperClassName={wrapperClass} src={imgSrc} />
       ) : (

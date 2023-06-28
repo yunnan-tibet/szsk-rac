@@ -7,12 +7,12 @@ import 'cropperjs/dist/cropper.css';
 
 import './index.scss';
 
-declare type IProps = {
+interface IProps {
   pic: string; // pic url
   visible: boolean; // 控制Modal显示
   onCloseModal: () => void; // 关闭Modal回调
   onCropData: (data: any) => void; // // ok回调
-};
+}
 
 const CropPicModal = (props: IProps) => {
   const { visible, pic, onCloseModal, onCropData } = props;

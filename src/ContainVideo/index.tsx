@@ -11,7 +11,7 @@ interface IProps {
   title: string; // 视频modal title
   outerClass?: string; // 传入的class
   cropEnable?: boolean; // 是否可以截图
-  videoCallback?: (dataUrl?: string) => void;
+  videoCallback?: (dataUrl?: string) => void; // 弹窗点击确定回调
 }
 const ContainVideo = (props: IProps) => {
   const {
