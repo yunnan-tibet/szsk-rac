@@ -1,6 +1,6 @@
 {
   "name": "@szsk/rac",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "szsk react admin components",
   "main": "lib/index.js",
   "files": [
@@ -28,10 +28,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/callF/szsk_rac"
+    "url": "https://github.com/yunnan-tibet/szsk_rac"
   },
   "bugs": {
-    "url": "https://github.com/callF/szsk_rac/issues"
+    "url": "https://github.com/yunnan-tibet/szsk_rac/issues"
   },
   "author": "qhchen@secusoft.cc",
   "license": "ISC",
