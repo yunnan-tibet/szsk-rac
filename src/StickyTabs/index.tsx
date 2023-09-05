@@ -12,14 +12,18 @@ import './index.scss';
 
 interface IProps {
   tabL: ITabItem[]; // tab列表
+  offsetTop?: number; // sticky距顶
+  // 是否被封住的盒子，即组件容器使用了relative，相对计算都只针对组件内部，和外部无关，默认false
+  isBox?: boolean;
   headEle?: React.ReactNode; // 顶部包裹固定的元素
   // 若容器不为window，则传入容器元素（要求容器顶部区域为固定高度区域，不滚动！！！）
   scrollContainer?: Element;
+  tabBarExtraContent?: any;
 }
 
 export interface ITabItem {
   key: string;
-  label: string;
+  label: string | React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -30,7 +34,14 @@ export interface ITabItem {
  * @returns
  */
 const StickyTabs = (props: IProps) => {
-  const { tabL, headEle, scrollContainer } = props;
+  const {
+    tabL,
+    headEle,
+    scrollContainer,
+    offsetTop = 0,
+    isBox,
+    tabBarExtraContent,
+  } = props;
   const sc = (scrollContainer || window) as any; // 容器
   const headRef = useRef<any>(null); // head元素
   const idleCallbackRef = useRef<any>(null);
@@ -102,7 +113,7 @@ const StickyTabs = (props: IProps) => {
 
   const scrollCb = useCallback(() => {
     let _activeKey;
-    let _h = headH;
+    let _h = headH + offsetTop;
     if (sc?.getBoundingClientRect) {
       // 默认容器外是固定的
       const { top: containerOffsetTop = 0 } = sc?.getBoundingClientRect();
@@ -153,9 +164,13 @@ const StickyTabs = (props: IProps) => {
   };
 
   return (
-    <div ref={stickyComp} className="m-stickyTabs">
+    <div
+      ref={stickyComp}
+      className="m-stickyTabs"
+      style={{ position: isBox ? 'relative' : 'unset' }}
+    >
       <StickyBox
-        offsetTop={0}
+        offsetTop={offsetTop}
         offsetBottom={20}
         style={{ zIndex: 1, backgroundColor: 'white' }}
       >
@@ -164,7 +179,16 @@ const StickyTabs = (props: IProps) => {
           {/* <div className="u-bg" /> */}
           {headEle}
           {/* 没有设置默认会选到第一个active */}
-          <Tabs activeKey={activeKey} onChange={onChange} items={tabHeads} />
+          <Tabs
+            tabBarExtraContent={tabBarExtraContent}
+            activeKey={activeKey}
+            onChange={onChange}
+          >
+            {(tabHeads || []).map((item) => {
+              const { key, label } = item;
+              return <Tabs.TabPane key={key} tabKey={key} tab={label} />;
+            })}
+          </Tabs>
         </div>
       </StickyBox>
 

@@ -22,6 +22,7 @@ import {
   IFormInputNumber,
   IFormUploader,
   IFormTreeSelect,
+  IFormRangePicker,
 } from './type';
 
 export default function getItemComponent(type: IFormType) {
@@ -85,6 +86,12 @@ export default function getItemComponent(type: IFormType) {
     return <DatePicker {...props} />;
   };
 
+  // rangepicker类型
+  const rangePicker = (item: IFormRangePicker) => {
+    const { props = {} } = item;
+    return <DatePicker.RangePicker {...props} />;
+  };
+
   // textArea类型
   const textArea = (item: IFormTextArea) => {
     const { props = {} } = item;
@@ -118,6 +125,7 @@ export default function getItemComponent(type: IFormType) {
     radio,
     checkbox,
     datePicker,
+    rangePicker,
     textArea,
     inputNumber,
     upload,

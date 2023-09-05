@@ -19,12 +19,12 @@ columns | 列数 | number | 3
 ------ | ------ | ------ | ------
 id | 参数key | string | -
 label | 前面的名称 | string | -
-type | item类型选择 | input\|select\|radio\|datePicker\|checkbox | -
+type | item类型选择 | input\|select\|radio\|datePicker\|rangePicker\|checkbox | -
 render | 自定义表单组件 | (item: T) => React.ReactNode | -
 initialValue | 初始值 | any | -
 rules | 表单校验规则数组 | Rule[] | -
 options | select\|checkbox\|radio类型的可选项 | ISelectOption[] | -
-props | 各种类型的基本可选属性 | InputProps\|SelectProps<any>\|RadioGroupProps\|DatePickerProps\|CheckboxGroupProps | -
+props | 各种类型的基本可选属性 | InputProps\|SelectProps<any>\|RadioGroupProps\|DatePickerProps\|RangePickerProps\|CheckboxGroupProps | -
 
 #### ISelectOption属性
 属性 | 说明 | 类型 | 默认值
@@ -135,7 +135,7 @@ export default Demo;
 
 ```
 #### Search
-用于列表搜索(实验版，谨慎使用)
+用于列表搜索
 #### SSearch属性
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
@@ -245,14 +245,19 @@ export default Demo;
 ### 响应式自适应型
 #### AutoSizeList
 自适应容器下用于卡片列表的自适应排列
-#### AutoSizeList属性
+##### 属性
+
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
 list | 数据源列表 | T[] | -
 CompCard | 组件形式渲染，为了解决hook放到组件内，减少耦合 | React.FC<{ data: T; idx: number }> | -
-render | item渲染方式，jsx形式，为了兼容之前的版本，后面将废弃!! | (data: T, idx: number) => React.ReactNode | -
 itemWidth | 卡片最小宽度 | number | -
 minSpace | 两个item中间最小间距 | number | 10
+
+##### ref
+属性 | 说明 | 类型 | 默认值
+------ | ------ | ------ | ------
+getRowCount | 获取一行个数 | () => number | -
 
 ```
 import React, { useRef, useState } from 'react';
@@ -310,13 +315,17 @@ const Demo = () => {
 export default Demo;
 ```
 #### StickyTabs
-tabs瀑布展示模块吸顶，整体模块head + tabs吸顶，tab切换与滚动联动
+tabs瀑布展示模块吸顶，整体模块head + tabs吸顶，tab切换与滚动联动（Tabs版本要求antd >= 4.23.0，否则可以拿源码修改一下）
 ```
 interface IProps {
   tabL: ITabItem[]; // tab列表
+  offsetTop?: number; // sticky距顶
+  // 是否被封住的盒子，即组件容器使用了relative，相对计算都只针对组件内部，和外部无关，默认false
+  isBox?: boolean;
   headEle?: React.ReactNode; // 顶部包裹固定的元素
-  // 若容器不为window，则传入容器元素
+  // 若容器不为window，则传入容器元素（要求容器顶部区域为固定高度区域，不滚动！！！）
   scrollContainer?: Element;
+  tabBarExtraContent?: any;
 }
 
 export interface ITabItem {

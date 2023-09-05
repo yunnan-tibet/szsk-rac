@@ -2,7 +2,7 @@ import { InputProps, TextAreaProps } from 'antd/lib/input';
 import { SelectProps } from 'antd/lib/select';
 import { RadioGroupProps } from 'antd/lib/radio';
 import { CheckboxGroupProps } from 'antd/lib/checkbox';
-import { DatePickerProps } from 'antd/lib/date-picker';
+import { DatePickerProps, RangePickerProps } from 'antd/lib/date-picker';
 import { Rule } from 'antd/lib/form';
 import { InputNumberProps, TreeProps, TreeSelectProps } from 'antd';
 import { IUploderProps } from '../ImageUploader';
@@ -13,6 +13,7 @@ export type IFormItem =
   | IFormSelect
   | IFormRadio
   | IFormDatePicker
+  | IFormRangePicker
   | IFormCheckbox
   | IFormTextArea
   | IFormUploader
@@ -24,6 +25,7 @@ export type IFormType =
   | 'select'
   | 'radio'
   | 'datePicker'
+  | 'rangePicker'
   | 'checkbox'
   | 'textArea'
   | 'upload'
@@ -84,6 +86,10 @@ export interface IFormRadio extends IFormItemBase {
 
 export interface IFormDatePicker extends IFormItemBase {
   props?: DatePickerProps;
+}
+
+export interface IFormRangePicker extends IFormItemBase {
+  props?: RangePickerProps;
 }
 
 export interface IFormCheckbox extends IFormItemBase {

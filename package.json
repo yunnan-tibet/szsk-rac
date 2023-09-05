@@ -1,6 +1,6 @@
 {
   "name": "@szsk/rac",
-  "version": "1.1.10",
+  "version": "1.2.8",
   "description": "react extra admin components",
   "main": "lib/index.js",
   "files": [

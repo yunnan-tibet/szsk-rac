@@ -1,5 +1,9 @@
-import { funcUtils } from '@szsk/utils';
-import React, { useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import useResizeAware from 'react-resize-aware';
 import './index.scss';
 
@@ -18,14 +22,25 @@ interface IProps {
   // 两个item中间最小间距
   minSpace?: number;
 }
-const AutoSizeList = (props: IProps) => {
+
+export interface IAutoSizeListRef {
+  getRowCount: () => number;
+}
+const AutoSizeList = forwardRef<IAutoSizeListRef, IProps>((props, ref) => {
   const { list = [], render, itemWidth, minSpace = 10, CompCard } = props;
   // space 间距px, itemNum 一行的最大个数
-  const [numObj, setNumObj] = useState({ itemNum: 1, space: minSpace });
+  const [numObj, setNumObj] = useState({ itemNum: 1 });
   // 监听父容器大小变化的hook
   const [containerResizeListener, containerSizes] = useResizeAware();
-  // 这里计算了一行最大高度，space是固定item宽度下可以存在的间距
-  const { itemNum: rowCount, space } = numObj;
+  // 这里计算了一行最大高度
+  const { itemNum: rowCount } = numObj;
+
+  useImperativeHandle(ref, () => ({
+    getRowCount: () => {
+      return rowCount || 0;
+    },
+  }));
+
   // 监听父容器宽度变化
   useEffect(() => {
     if (containerSizes.width) {
@@ -35,12 +50,7 @@ const AutoSizeList = (props: IProps) => {
       // 因为最后一个item是没有Space的，这里加一个minSpace互补
       const itemNum = Math.floor((cWidth + minSpace) / (itemWidth + minSpace));
       // 初始化，数量小于最大个数，margin单边限定为minSpace，防止抖动
-      let mySpace = minSpace;
-      if (list.length >= itemNum) {
-        // 容器宽度 - item占据总宽度 / 间距个数 = 间距 px
-        mySpace = Math.floor((cWidth - itemNum * itemWidth) / (itemNum - 1));
-      }
-      setNumObj({ itemNum, space: mySpace });
+      setNumObj({ itemNum });
     }
   }, [containerSizes.width, list, itemWidth, minSpace]);
 
@@ -50,40 +60,22 @@ const AutoSizeList = (props: IProps) => {
       {list.map((item, idx) => {
         // 用于到达最大个数换行
         if (idx % rowCount === 0) {
-          const isLastLine = idx + rowCount >= list.length;
-          const lastLineFull = idx + rowCount === list.length;
           return (
             <div
-              className={`m-row ${isLastLine ? 'f-lastRow' : ''} ${
-                lastLineFull ? 'f-full' : ''
-              }`}
+              className="m-row"
+              style={{
+                gridTemplateColumns: `repeat(${rowCount}, minmax(0, 1fr))`,
+                columnGap: `${minSpace}px`,
+              }}
               key={`${idx}`}
             >
               {list.map((_item, jdx) => {
                 if (jdx >= idx && jdx < idx + rowCount) {
-                  const getStyle = () => {
-                    const percent = (1 / rowCount) * 100;
-                    // 自适应的
-                    if (jdx === idx + rowCount - 1) {
-                      // 一行的最后一个
-                      return {
-                        flex: `0 0 ${percent}%`,
-                        maxWidth: `${percent}%`,
-                      };
-                    }
-                    // 非最后一个
-                    return {
-                      paddingRight: `${minSpace}px`,
-                      flex: `0 0 ${percent}%`,
-                      maxWidth: `${percent}%`,
-                    };
-                  };
                   return (
                     <div
                       // 以idx作为key，会让diff认为这个节点本身一直都是没有变更的
                       key={`${idx}${jdx}`}
                       className="m-autoSpaceItem"
-                      style={getStyle()}
                     >
                       {CompCard && <CompCard data={_item} idx={jdx} />}
                       {render && render(_item, jdx)}
@@ -99,6 +91,6 @@ const AutoSizeList = (props: IProps) => {
       })}
     </div>
   );
-};
+});
 
 export default AutoSizeList;
