@@ -1,3 +1,13 @@
+### 1.2.13
+1.README.md更新
+### 1.2.12
+1.StickyTabs去除debugger
+### 1.2.11
+1.StickyTabs优化
+### 1.2.10
+1.StickyTabs 去除isBox
+### 1.2.9
+1.StickyTabs优化
 ### 1.2.8
 1.StickyTabs tabs子元素兼容，使用4.23.0前antd，TabPane形式
 ### 1.2.7

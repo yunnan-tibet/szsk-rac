@@ -12,13 +12,12 @@ import './index.scss';
 
 interface IProps {
   tabL: ITabItem[]; // tab列表
-  offsetTop?: number; // sticky距顶
-  // 是否被封住的盒子，即组件容器使用了relative，相对计算都只针对组件内部，和外部无关，默认false
-  isBox?: boolean;
+  offsetTop?: number; // 容器距顶fixed的top距离
   headEle?: React.ReactNode; // 顶部包裹固定的元素
-  // 若容器不为window，则传入容器元素（要求容器顶部区域为固定高度区域，不滚动！！！）
-  scrollContainer?: Element;
   tabBarExtraContent?: any;
+  // scrollContainer是为了兼容容器是scroll的，传入容器元素的处理目前可能存在问题（要求容器顶部区域为固定高度区域，不滚动！！！）
+  // 若不是必须先不考虑scrollContainer
+  scrollContainer?: Element;
 }
 
 export interface ITabItem {
@@ -39,7 +38,6 @@ const StickyTabs = (props: IProps) => {
     headEle,
     scrollContainer,
     offsetTop = 0,
-    isBox,
     tabBarExtraContent,
   } = props;
   const sc = (scrollContainer || window) as any; // 容器
@@ -51,11 +49,6 @@ const StickyTabs = (props: IProps) => {
   const [containerResizeListener, containerSizes] = useResizeAware(); // 监听head高度变化hook，需要重新计算headH
   const [headH, setHeadH] = useState<number>(0); // 固定的head高度，相对于视口
   const [distance, setDistance] = useState<number>(0); // 当前组件距离固定容器的距离
-
-  // 默认选中第一个
-  useEffect(() => {
-    tabL && tabL.length && setActiveKey(tabL[0].key);
-  }, [tabL]);
 
   const tabHeads = useMemo(() => {
     return tabL.map((item) => {
@@ -89,12 +82,14 @@ const StickyTabs = (props: IProps) => {
   const calculateDistanceToTop = () => {
     // 固定的外层高度，距定位父元素高度
     let extraHeight = 0;
+    let scInfo;
     if (sc?.getBoundingClientRect && stickyComp.current) {
       // 获取固定的滚动父元素距离视口
-      const { top: containerTop } = sc.getBoundingClientRect();
-      const compTop = getDistanceFromTop(stickyComp.current);
-      extraHeight = compTop - containerTop;
+      scInfo = sc.getBoundingClientRect();
     }
+    const compTop = getDistanceFromTop(stickyComp.current);
+    const { top: containerTop = 0 } = scInfo || {};
+    extraHeight = compTop - containerTop;
     if (extraHeight !== distance) {
       setDistance(extraHeight);
     }
@@ -157,8 +152,9 @@ const StickyTabs = (props: IProps) => {
 
   const onChange = (key: string) => {
     sc.scrollTo({
+      // 元素到stickyTabs的顶部距离 + stickyTabs距离包裹容器的距离 - stickyTabs的headH（sticky） - fixed距顶距离 + 1
       // + 1 是因为计算存在偏差，四舍五入导致的误差
-      top: childRefs.current[key].offsetTop - headH + distance + 1,
+      top: childRefs.current[key].offsetTop + distance - headH - offsetTop + 1,
       behavior: 'smooth',
     });
   };
@@ -167,7 +163,7 @@ const StickyTabs = (props: IProps) => {
     <div
       ref={stickyComp}
       className="m-stickyTabs"
-      style={{ position: isBox ? 'relative' : 'unset' }}
+      style={{ position: 'relative' }}
     >
       <StickyBox
         offsetTop={offsetTop}

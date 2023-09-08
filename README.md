@@ -250,7 +250,7 @@ export default Demo;
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
 list | 数据源列表 | T[] | -
-CompCard | 组件形式渲染，为了解决hook放到组件内，减少耦合 | React.FC<{ data: T; idx: number }> | -
+CompCard | 组件形式渲染 | React.FC<{ data: T; idx: number }> | -
 itemWidth | 卡片最小宽度 | number | -
 minSpace | 两个item中间最小间距 | number | 10
 
@@ -315,17 +315,16 @@ const Demo = () => {
 export default Demo;
 ```
 #### StickyTabs
-tabs瀑布展示模块吸顶，整体模块head + tabs吸顶，tab切换与滚动联动（Tabs版本要求antd >= 4.23.0，否则可以拿源码修改一下）
+tabs瀑布展示模块吸顶，整体模块head + tabs吸顶，tab切换与滚动联动
 ```
 interface IProps {
   tabL: ITabItem[]; // tab列表
-  offsetTop?: number; // sticky距顶
-  // 是否被封住的盒子，即组件容器使用了relative，相对计算都只针对组件内部，和外部无关，默认false
-  isBox?: boolean;
+  offsetTop?: number; // 容器距顶fixed的top距离
   headEle?: React.ReactNode; // 顶部包裹固定的元素
-  // 若容器不为window，则传入容器元素（要求容器顶部区域为固定高度区域，不滚动！！！）
-  scrollContainer?: Element;
   tabBarExtraContent?: any;
+  // scrollContainer是为了兼容容器是scroll的，传入容器元素的处理目前可能存在问题（要求容器顶部区域为固定高度区域，不滚动！！！）
+  // 若不是必须先不考虑用scrollContainer
+  scrollContainer?: Element;
 }
 
 export interface ITabItem {
@@ -333,6 +332,7 @@ export interface ITabItem {
   label: string;
   children?: React.ReactNode;
 }
+
 ```
 #### ContainImage
 图片自适应块居中展示
