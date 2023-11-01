@@ -12,19 +12,19 @@ antd组件的补充，react后台管理
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
 formItems | item配置 | IFormItem[] | -
-columns | 列数 | number | 3
+columns? | 列数 | number | 3
 
 #### IFormItem属性
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
 id | 参数key | string | -
 label | 前面的名称 | string | -
-type | item类型选择 | input\|select\|radio\|datePicker\|rangePicker\|checkbox | -
-render | 自定义表单组件 | (item: T) => React.ReactNode | -
-initialValue | 初始值 | any | -
-rules | 表单校验规则数组 | Rule[] | -
-options | select\|checkbox\|radio类型的可选项 | ISelectOption[] | -
-props | 各种类型的基本可选属性 | InputProps\|SelectProps<any>\|RadioGroupProps\|DatePickerProps\|RangePickerProps\|CheckboxGroupProps | -
+type? | item类型选择 | input\|select\|radio\|datePicker\|rangePicker\|checkbox | -
+render? | 自定义表单组件 | (item: T) => React.ReactNode | -
+initialValue? | 初始值 | any | -
+rules? | 表单校验规则数组 | Rule[] | -
+options? | select\|checkbox\|radio类型的可选项 | ISelectOption[] | -
+props? | 各种类型的基本可选属性 | InputProps\|SelectProps<any>\|RadioGroupProps\|DatePickerProps\|RangePickerProps\|CheckboxGroupProps | -
 
 #### ISelectOption属性
 属性 | 说明 | 类型 | 默认值
@@ -140,8 +140,8 @@ export default Demo;
 属性 | 说明 | 类型 | 默认值
 ------ | ------ | ------ | ------
 formItems | item配置 | IFormItem[] | -
-columns | 列数 | number | 3
 onSearch | search方法，默认挂载即搜索一次 | (params: any, toFirst: boolean, isReset: boolean) => any，params为搜索参数集合，toFirst为是否跳到第一页，isReset为是否为重置 | -
+columns? | 列数 | number | 3
 ```
 import React, { useRef, useState } from 'react';
 import { SForm, SSearch } from '@szsk/rac';
@@ -252,13 +252,10 @@ export default Demo;
 list | 数据源列表 | T[] | -
 CompCard | 组件形式渲染 | React.FC<{ data: T; idx: number }> | -
 itemWidth | 卡片最小宽度 | number | -
-minSpace | 两个item中间最小间距 | number | 10
+space? | 两个item中间间距 | number | 10px
+rowNum? | 显示的行数，有时候只是想显示几行推荐的 | number | -
 
-##### ref
-属性 | 说明 | 类型 | 默认值
------- | ------ | ------ | ------
-getRowCount | 获取一行个数 | () => number | -
-
+##### 示例
 ```
 import React, { useRef, useState } from 'react';
 import { SForm, SSearch, AutoSizeList } from '@szsk/rac';
@@ -309,7 +306,7 @@ const Demo = () => {
     );
   };
 
-  return <AutoSizeList list={list} CompCard={<Card />} minSpace={24} itemWidth={itemWidth} />;
+  return <AutoSizeList list={list} CompCard={<Card />} space={24} itemWidth={itemWidth} />;
 };
 
 export default Demo;
@@ -322,8 +319,10 @@ interface IProps {
   offsetTop?: number; // 容器距顶fixed的top距离
   headEle?: React.ReactNode; // 顶部包裹固定的元素
   tabBarExtraContent?: any;
+  // 副作用：smooth形式下点击tab滚动，短时间内可能会导致自行滚动的tab active无效
+  behavior?: 'instant' | 'smooth'; // 滚动形式1.instant 表示滚动会直接跳转到目标位置 2.smooth 平滑滚动并产生过渡效果
   // scrollContainer是为了兼容容器是scroll的，传入容器元素的处理目前可能存在问题（要求容器顶部区域为固定高度区域，不滚动！！！）
-  // 若不是必须先不考虑用scrollContainer
+  // 若不是必须先不考虑scrollContainer
   scrollContainer?: Element;
 }
 

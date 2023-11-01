@@ -1,3 +1,17 @@
+### 1.4.2
+1.TableHeaderConfig组件类型定义等优化
+### 1.4.1
+1.TableHeaderConfig组件children参数不必填
+### 1.4.0
+1.新增TableHeaderConfig组件
+### 1.3.1
+1.文档更新
+### 1.3.0
+1.AutoSizeList去除render，minSpace -> space，加入rowNum
+### 1.2.15
+1.StickyTabs滚动优化
+### 1.2.14
+1.StickyTabs优化：1初始选中key，2滚动到底下active不了，3requestIdleCallback降级处理
 ### 1.2.13
 1.README.md更新
 ### 1.2.12

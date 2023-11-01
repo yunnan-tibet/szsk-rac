@@ -75,7 +75,7 @@ export interface IFormSelect extends IFormItemBase {
 
 export interface ISelectOption {
   label: string;
-  value: string | number;
+  value: any;
 }
 
 export interface IFormRadio extends IFormItemBase {

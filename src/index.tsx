@@ -14,3 +14,4 @@ export { default as TextCopy } from './TextCopy';
 export { default as AutoSizeList } from './AutoSizeList';
 export { default as ImageUploader } from './ImageUploader';
 export { default as StickyTabs } from './StickyTabs';
+export { default as TableHeaderConfig } from './TableHeaderConfig';

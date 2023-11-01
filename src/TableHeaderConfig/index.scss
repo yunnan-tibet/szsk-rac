@@ -1,0 +1,70 @@
+.m-myPopover {
+  padding-top: 0px;
+  min-width: 210px;
+  min-height: 210px;
+
+  .m-myPop {
+    .m-myPop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 16px;
+      .m-myPop-header-tit {
+        height: 20px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #333333;
+        line-height: 20px;
+      }
+    }
+    .m-myPop-cont {
+      padding: 16px;
+
+      .m-dragContainer {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+      }
+    }
+  }
+
+  .ant-popover-inner-content {
+    padding: 0;
+  }
+  .ant-popover-arrow {
+    display: none;
+  }
+}
+
+.m-sortableItem {
+  min-width: 148px;
+  .m-sortable-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .m-sortable-item-left {
+      display: flex;
+      align-items: center;
+
+      .m-sortable-item-left-name {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+      }
+    }
+  }
+}
+
+.m-tableHeaderConfig {
+  display: inline-block;
+  cursor: pointer;
+  .settingBtn {
+    cursor: pointer;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+  }
+}
