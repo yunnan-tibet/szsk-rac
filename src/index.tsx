@@ -12,6 +12,8 @@ export { default as CropPicModal } from './CropPicModal';
 export { default as PictrueJigsaw } from './PictrueJigsaw';
 export { default as TextCopy } from './TextCopy';
 export { default as AutoSizeList } from './AutoSizeList';
+export { default as AutoFillTable } from './AutoFillTable';
+export { default as Cron } from './Cron';
 export { default as ImageUploader } from './ImageUploader';
 export { default as StickyTabs } from './StickyTabs';
 export { default as TableHeaderConfig } from './TableHeaderConfig';

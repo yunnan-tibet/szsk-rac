@@ -1,3 +1,5 @@
+### 1.6.0
+1.增加Cron表达式
 ### 1.5.0
 1.@szsk/utils升级1.2.3
 2.新增AutoFillTable组件
