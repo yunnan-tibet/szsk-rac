@@ -1,3 +1,6 @@
+### 1.5.0
+1.@szsk/utils升级1.2.3
+2.新增AutoFillTable组件
 ### 1.4.2
 1.TableHeaderConfig组件类型定义等优化
 ### 1.4.1
