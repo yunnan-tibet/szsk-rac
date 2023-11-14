@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TableProps } from 'antd/lib/table';
-import './index.less';
+import './index.scss';
 
 const TABLE_SKIP_HEIGHT = 94 + 4; // fontSize从12 -> 14，加了4
 

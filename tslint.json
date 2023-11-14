@@ -1,7 +1,7 @@
 {
   "extends": ["tslint:recommended", "tslint-react"],
   "linterOptions": {
-    "exclude": ["node_modules", "**/*.js", "**/*.jsx"]
+    "exclude": ["node_modules"]
   },
   "rules": {
     "no-console": [true, "log"],
