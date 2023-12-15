@@ -1,4 +1,4 @@
-import './index.scss';
+import './index.less';
 import React, { useState, useRef } from 'react';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { Button, message, Modal } from 'antd';
@@ -6,22 +6,26 @@ import { noop } from '@szsk/utils/lib/func';
 
 interface IProps {
   videoSrc: string; // 视频地址
-  width: string; // 容器宽度
-  height: string; // 容器高度
-  title: string; // 视频modal title
+  style?: React.CSSProperties; // css样式
+  width?: string; // 容器宽度
+  height?: string; // 容器高度
+  title?: string; // 视频modal title
   outerClass?: string; // 传入的class
   cropEnable?: boolean; // 是否可以截图
   videoCallback?: (dataUrl?: string) => void; // 弹窗点击确定回调
+  children?: React.ReactNode;
 }
 const ContainVideo = (props: IProps) => {
   const {
     videoSrc = '',
     outerClass,
     title,
-    width = '100px',
-    height = '100px',
+    style = {},
+    width,
+    height,
     cropEnable,
     videoCallback = noop,
+    children,
   } = props;
   const [visible, setVisible] = useState(false);
   const [videoSrcData, setVideoSrc] = useState(videoSrc);
@@ -210,25 +214,44 @@ const ContainVideo = (props: IProps) => {
     </div>
   );
 
+  const styles = {
+    ...style,
+    width: children ? width || style.width : width || style.width || '100px',
+    height: children
+      ? height || style.height
+      : height || style.height || '100px',
+  };
+
   return (
     <>
       <div
         className={`m-component-common-video ${outerClass}`}
-        style={{ width, height }}
-        // onClick={(e) => {
-        //   e.stopPropagation();
-        //   videoCallback();
-        // }}
-      >
-        <video src={videoSrc} />
-        <PlayCircleOutlined
-          className="u-play-btn"
-          style={{ fontSize: '26px' }}
-          onClick={(e) => {
+        style={styles}
+        onClick={(e) => {
+          if (children) {
             e.stopPropagation();
             onOpenVideo();
-          }}
-        />
+          }
+        }}
+      >
+        {children || (
+          <>
+            <video src={videoSrc}>
+              <track
+                kind="captions"
+                title="您的浏览器不支持video标签，请使用google浏览器浏览"
+              />
+            </video>
+            <PlayCircleOutlined
+              className="u-play-btn"
+              style={{ fontSize: '26px', color: 'red' }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenVideo();
+              }}
+            />
+          </>
+        )}
       </div>
       <Modal
         title={title}
@@ -252,7 +275,10 @@ const ContainVideo = (props: IProps) => {
             crossOrigin="anonymous"
             ref={VideoRef}
           >
-            您的浏览器不支持video标签，请使用google浏览器浏览
+            <track
+              kind="captions"
+              title="您的浏览器不支持video标签，请使用google浏览器浏览"
+            />
           </video>
           {startCrop && renderCrop()}
         </div>
@@ -260,4 +286,4 @@ const ContainVideo = (props: IProps) => {
     </>
   );
 };
-export default ContainVideo;
+export default React.memo(ContainVideo);

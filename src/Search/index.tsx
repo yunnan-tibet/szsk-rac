@@ -61,4 +61,4 @@ const SSearch = forwardRef((props: ISSearch, ref) => {
   );
 });
 
-export default SSearch;
+export default React.memo(SSearch);

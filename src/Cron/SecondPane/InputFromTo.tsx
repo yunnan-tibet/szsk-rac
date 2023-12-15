@@ -38,4 +38,4 @@ function InputFromTo(props: any) {
   );
 }
 
-export default InputFromTo;
+export default React.memo(InputFromTo);

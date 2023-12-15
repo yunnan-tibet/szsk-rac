@@ -16,7 +16,7 @@ interface IMoniteTime {
   endTime?: string;
 }
 
-export default function TimeSelect(props: ITimeSelect) {
+function TimeSelect(props: ITimeSelect) {
   const { onChange, value } = props;
 
   const [date, setDate] = useState<any>([]);
@@ -68,3 +68,4 @@ export default function TimeSelect(props: ITimeSelect) {
     </div>
   );
 }
+export default React.memo(TimeSelect);

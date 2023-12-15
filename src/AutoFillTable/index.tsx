@@ -90,4 +90,4 @@ class AutoFillTable extends React.PureComponent<
   }
 }
 
-export default AutoFillTable;
+export default React.memo(AutoFillTable);

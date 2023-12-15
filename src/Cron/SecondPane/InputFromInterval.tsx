@@ -37,4 +37,4 @@ function InputFromInterval(props: any) {
   );
 }
 
-export default InputFromInterval;
+export default React.memo(InputFromInterval);

@@ -17,3 +17,4 @@ export { default as Cron } from './Cron';
 export { default as ImageUploader } from './ImageUploader';
 export { default as StickyTabs } from './StickyTabs';
 export { default as TableHeaderConfig } from './TableHeaderConfig';
+export { default as FlexibleTable } from './FlexibleTable';

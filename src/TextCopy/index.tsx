@@ -35,4 +35,4 @@ const TextCopy = (props: IProps) => {
   );
 };
 
-export default TextCopy;
+export default React.memo(TextCopy);

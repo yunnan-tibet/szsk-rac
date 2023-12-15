@@ -59,4 +59,4 @@ function SecondPane(props: any) {
   );
 }
 
-export default SecondPane;
+export default React.memo(SecondPane);

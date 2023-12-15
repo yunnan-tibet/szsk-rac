@@ -1,3 +1,8 @@
+### 1.7.0
+1.新增FlexibleTable组件
+2.优化ContainVideo，增加children属性作为按钮展示
+3.整体组件加React.memo
+4.优化SForm，增加layout-inline模式，对于定制化需求可以进行平铺
 ### 1.6.4
 1.Cron组件变为tsx组件
 ### 1.6.3

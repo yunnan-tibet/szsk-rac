@@ -71,4 +71,4 @@ function YearPane(props: any) {
   );
 }
 
-export default YearPane;
+export default React.memo(YearPane);

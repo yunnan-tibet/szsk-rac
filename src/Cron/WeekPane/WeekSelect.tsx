@@ -25,4 +25,4 @@ function WeekSelect(props: any) {
   );
 }
 
-export default WeekSelect;
+export default React.memo(WeekSelect);

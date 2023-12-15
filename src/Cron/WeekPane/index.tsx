@@ -74,4 +74,4 @@ function WeekPane(props: any) {
   );
 }
 
-export default WeekPane;
+export default React.memo(WeekPane);

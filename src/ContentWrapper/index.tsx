@@ -13,7 +13,7 @@ interface IBaseWrapperProps {
   className?: string;
 }
 
-export default function ContentWrapper(props: IContentWrapperProps) {
+function ContentWrapper(props: IContentWrapperProps) {
   const { children, title, className } = props;
   return (
     <div className={`g-wrapper ${className || ''}`}>
@@ -22,3 +22,5 @@ export default function ContentWrapper(props: IContentWrapperProps) {
     </div>
   );
 }
+
+export default React.memo(ContentWrapper);

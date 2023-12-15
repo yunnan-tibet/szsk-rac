@@ -13,6 +13,7 @@ export interface ISFormProps extends FormProps {
 const SForm = forwardRef((props: ISFormProps, ref: any) => {
   const { formItems, columns = 4, ...resProps } = props;
   const getFields = () => {
+    const { layout } = resProps;
     return formItems.map((item: IFormItem, idx: number) => {
       const { label, id, type, rules, initialValue, render } = item;
       // 因为两个input间需要间隔，设置每行第一个和最后一个特殊化padding
@@ -31,7 +32,16 @@ const SForm = forwardRef((props: ISFormProps, ref: any) => {
           span = 5;
         }
       }
-      return (
+      return layout === 'inline' ? (
+        <Form.Item
+          rules={rules}
+          initialValue={initialValue}
+          label={label}
+          name={id}
+        >
+          {type ? getItemComponent(type)(item as any) : render()}
+        </Form.Item>
+      ) : (
         <Col style={{ padding }} key={id} span={span}>
           <Form.Item
             rules={rules}
@@ -53,4 +63,4 @@ const SForm = forwardRef((props: ISFormProps, ref: any) => {
   );
 });
 
-export default SForm;
+export default React.memo(SForm);

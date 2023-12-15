@@ -59,4 +59,4 @@ function HourPane(props: any) {
   );
 }
 
-export default HourPane;
+export default React.memo(HourPane);

@@ -84,4 +84,4 @@ const CropPicModal = (props: IProps) => {
     </Modal>
   );
 };
-export default CropPicModal;
+export default React.memo(CropPicModal);

@@ -39,4 +39,4 @@ function InputSpecified(props: any) {
   );
 }
 
-export default InputSpecified;
+export default React.memo(InputSpecified);

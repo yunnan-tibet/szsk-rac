@@ -303,4 +303,4 @@ function Cron(props: IProps) {
   );
 }
 
-export default Cron;
+export default React.memo(Cron);

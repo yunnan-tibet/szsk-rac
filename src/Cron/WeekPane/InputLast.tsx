@@ -24,4 +24,4 @@ function InputLast(props: any) {
   );
 }
 
-export default InputLast;
+export default React.memo(InputLast);

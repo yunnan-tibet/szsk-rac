@@ -47,4 +47,4 @@ const ImageUploader = (props: IUploderProps) => {
   );
 };
 
-export default ImageUploader;
+export default React.memo(ImageUploader);

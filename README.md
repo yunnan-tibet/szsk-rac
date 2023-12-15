@@ -352,12 +352,14 @@ video自适应块居中展示，包含视频截图功能
 ```
 interface IProps {
   videoSrc: string; // 视频地址
-  width: string; // 容器宽度
-  height: string; // 容器高度
-  title: string; // 视频modal title
+  style?: React.CSSProperties; // css样式
+  width?: string; // 容器宽度
+  height?: string; // 容器高度
+  title?: string; // 视频modal title
   outerClass?: string; // 传入的class
   cropEnable?: boolean; // 是否可以截图
   videoCallback?: (dataUrl?: string) => void; // 弹窗点击确定回调
+  children?: React.ReactNode;
 }
 ```
 <!-- #### ContainAttach

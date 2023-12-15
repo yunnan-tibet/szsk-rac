@@ -39,4 +39,4 @@ function InputTarget(props: any) {
   );
 }
 
-export default InputTarget;
+export default React.memo(InputTarget);

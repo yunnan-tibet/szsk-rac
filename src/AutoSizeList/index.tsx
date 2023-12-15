@@ -83,4 +83,4 @@ const AutoSizeList = forwardRef<IAutoSizeListRef, IProps>((props, ref) => {
   );
 });
 
-export default AutoSizeList;
+export default React.memo(AutoSizeList);

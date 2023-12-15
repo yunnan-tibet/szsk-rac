@@ -59,4 +59,4 @@ function MinutePane(props: any) {
   );
 }
 
-export default MinutePane;
+export default React.memo(MinutePane);

@@ -65,4 +65,4 @@ const ContainImage = (props: IProps) => {
     </div>
   );
 };
-export default ContainImage;
+export default React.memo(ContainImage);

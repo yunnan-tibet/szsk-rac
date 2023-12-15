@@ -50,11 +50,16 @@ const PictrueJigsaw: React.FC<IPictureJigsawProps> = (
   return (
     <div style={{ width, height }} className={`m-pictureJigsaw ${className}`}>
       {enable &&
-        picList.map((src: string) => (
-          <ContainImage imgSrc={src} width={itemWidth} height={itemHeight} />
+        picList.map((src: string, idx: number) => (
+          <ContainImage
+            key={idx}
+            imgSrc={src}
+            width={itemWidth}
+            height={itemHeight}
+          />
         ))}
     </div>
   );
 };
 
-export default PictrueJigsaw;
+export default React.memo(PictrueJigsaw);

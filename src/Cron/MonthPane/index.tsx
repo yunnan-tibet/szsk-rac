@@ -59,4 +59,4 @@ function MonthPane(props: any) {
   );
 }
 
-export default MonthPane;
+export default React.memo(MonthPane);

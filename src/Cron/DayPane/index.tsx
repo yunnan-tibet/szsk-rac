@@ -64,4 +64,4 @@ function DayPane(props: any) {
   );
 }
 
-export default DayPane;
+export default React.memo(DayPane);

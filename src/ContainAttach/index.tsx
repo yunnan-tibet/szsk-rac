@@ -53,4 +53,4 @@ const ContainAttach = (props: IProps) => {
     </>
   );
 };
-export default ContainAttach;
+export default React.memo(ContainAttach);
