@@ -1,3 +1,7 @@
+### 1.7.2
+1.AutoSizeList优化
+### 1.7.1
+1.包异常问题解决
 ### 1.7.0
 1.新增FlexibleTable组件
 2.优化ContainVideo，增加children属性作为按钮展示

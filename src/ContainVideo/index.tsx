@@ -1,4 +1,4 @@
-import './index.less';
+import './index.scss';
 import React, { useState, useRef } from 'react';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { Button, message, Modal } from 'antd';

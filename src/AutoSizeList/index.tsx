@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useLayoutEffect, useState } from 'react';
 import useResizeAware from 'react-resize-aware';
 import './index.scss';
 
@@ -31,8 +31,8 @@ const AutoSizeList = forwardRef<IAutoSizeListRef, IProps>((props, ref) => {
   const { itemNum: rowCount } = numObj;
 
   // 监听父容器宽度变化
-  useEffect(() => {
-    if (containerSizes.width) {
+  useLayoutEffect(() => {
+    if (containerSizes?.width) {
       // 容器宽度
       const cWidth = Math.floor(containerSizes.width - 1);
       // 一行的最大个数，但是因为用的是floor，所以item宽度可能缺失，间距增加，space需要增加
@@ -41,7 +41,7 @@ const AutoSizeList = forwardRef<IAutoSizeListRef, IProps>((props, ref) => {
       // 初始化，数量小于最大个数，margin单边限定为minSpace，防止抖动
       setNumObj({ itemNum });
     }
-  }, [containerSizes.width, list, itemWidth, space]);
+  }, [containerSizes?.width, list, itemWidth, space]);
 
   const showList = rowNum ? list.slice(0, rowCount * rowNum) : list;
 

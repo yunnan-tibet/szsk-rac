@@ -29,7 +29,7 @@ function replaceScssText(filePath) {
                 if (str.includes('./index.scss')) {
                   fs.writeFile(
                     filedir,
-                    str.replace(/index\.scss/g, 'index.css'),
+                    str.replace(/index\.(scss|less)/g, 'index.css'),
                     function (err) {
                       if (err) {
                         return console.error(err);
